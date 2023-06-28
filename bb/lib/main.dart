@@ -1,9 +1,10 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:bb/timer.dart';
+import 'package:bb/constants.dart';
 
-final Color mainColor1 =  Color(0xFF0E2954);
-final Color mainColor2 =  Color(0xFF1F6E8C);
-final Color mainColor3 =  Color(0xFF2E8A99);
-final Color mainColor4 = Color(0xFF84A7A1);
+
+
 void main() {
   runApp(MyApp());
 }
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: mainColor1,
       ),
-      home: MainPage(),//title: 'Flutter Drawer Demo Home Page'),
+      home: MainPage(title: 'Main'),
       
     );
   }
@@ -26,17 +27,22 @@ class MainPage extends StatelessWidget {
   final String title;
 
 
-  MainPage({Key key= const Key(''), this.title='Book Buster!!'}) : super(key: key);
+  MainPage({Key? key, required this.title}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+      backgroundColor: mainColor1 ,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(150.0), 
+      child: AppBar(
         title: Text(title),
+        backgroundColor: mainColor1,
 
         actions: <Widget>[
           IconButton(
             icon: const Icon(Icons.notifications),
+            iconSize: 17.0,
             onPressed: () {
               print('Alarm button pressed.');
               // 알람 버튼 눌렸을 때의 동작을 작성하세요
@@ -44,6 +50,7 @@ class MainPage extends StatelessWidget {
           ),
           IconButton(
             icon: const Icon(Icons.search),
+            iconSize: 17.0,
             onPressed: () {
               print('Search button pressed.');
               // 검색 버튼 눌렸을 때의 동작을 작성하세요
@@ -51,18 +58,21 @@ class MainPage extends StatelessWidget {
           ),
         ],
       ),
+      ),
       drawer: Drawer(
+        backgroundColor: mainColor4,
         child: ListView(
           padding: EdgeInsets.zero,
           children: <Widget>[
             DrawerHeader(
               decoration: BoxDecoration(
                 color: mainColor1,
+                
               ),
               child: Text(
                 'Drawer Header',
                 style: TextStyle(
-                  color: Colors.white,
+                  color: mainColor4,
                   fontSize: 24,
                 ),
               ),
@@ -125,10 +135,11 @@ class MainPage extends StatelessWidget {
         ),
       ),
       body: const Column(
+        
         children: <Widget>[
-          Card(
+          
+          Card( 
                 child: InkWell(
-                  splashColor: Colors.blue,
                   // onTap: () {print('Card tapped.')},
                   child: SizedBox(
                     width: 500,
@@ -141,9 +152,10 @@ class MainPage extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => TimerPage()),);
           // 클릭시 수행될 동작을 작성하세요
         },
-        backgroundColor: Colors.blue,  // 버튼의 배경색
+        backgroundColor: mainColor4,  // 버튼의 배경색
         child: const Text('R'),  // 버튼의 아이콘
       ),
     );
